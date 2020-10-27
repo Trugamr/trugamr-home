@@ -6,7 +6,10 @@ const RainbowText = ({ fontSize = 30, text = '🌈rainbow' }) => {
   const canvasRef = useRef(null)
   const svgTextRef = useRef(null)
   const [stopAnimation, setStopAnimation] = useState(null)
-  const clipPathId = `${styles.svgTextPath}-${text}-${fontSize}`
+  const clipPathId = `${styles.svgTextPath}-${text.replace(
+    /\s+/g, // replace spaces with - (space breaks id name)
+    '-',
+  )}-${fontSize}`
   // Function variable to save stopAnimation function
 
   // Set canvas width and height based on text dimensions
@@ -45,6 +48,15 @@ const RainbowText = ({ fontSize = 30, text = '🌈rainbow' }) => {
       document.fonts.removeEventListener('loadingdone', fontsLoaded)
     }
   }, [canvasRef, svgTextRef])
+
+  // If text changes recalcuate dimensions
+  useEffect(() => {
+    // Get canvas ref and 2d context
+    const canvas = canvasRef.current
+    const svgText = svgTextRef.current
+    console.log(text, 'called')
+    setCanvasDimensions(canvas, svgText)
+  }, [text])
 
   return (
     <Fragment>
