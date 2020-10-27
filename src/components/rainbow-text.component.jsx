@@ -5,8 +5,9 @@ import styles from './rainbow-text.module.css'
 const RainbowText = ({ fontSize = 30, text = '🌈rainbow' }) => {
   const canvasRef = useRef(null)
   const svgTextRef = useRef(null)
-  const [animReqId, setAnimReqId] = useState(null)
+  const [stopAnimation, setStopAnimation] = useState(null)
   const clipPathId = `${styles.svgTextPath}-${text}-${fontSize}`
+  // Function variable to save stopAnimation function
 
   // Set canvas width and height based on text dimensions
   const setCanvasDimensions = (canvas, svgText) => {
@@ -29,14 +30,10 @@ const RainbowText = ({ fontSize = 30, text = '🌈rainbow' }) => {
     setCanvasDimensions(canvas, svgText)
 
     // Start animation by passing the context
-    // TODO: breaks in case of multiple uses of this component
-    // setAnimReqId gets called with last frame reqId
-    // This reqId can used to cancel the animation
-    if (animReqId) {
-      window.cancelAnimationFrame(animReqId)
-      setAnimReqId(null)
+    // This returns a stop an imation function (clears the setInterval call)
+    if (!stopAnimation) {
+      setStopAnimation(() => startAnimation(context))
     }
-    startAnimation(context, setAnimReqId)
 
     // Montserrat font loaded
     // Change font and recalculate width and height of canvas
@@ -44,8 +41,10 @@ const RainbowText = ({ fontSize = 30, text = '🌈rainbow' }) => {
     document.fonts.addEventListener('loadingdone', fontsLoaded)
 
     // Cleanup function
-    return () => document.fonts.removeEventListener('loadingdone', fontsLoaded)
-  }, [setAnimReqId, canvasRef, svgTextRef])
+    return () => {
+      document.fonts.removeEventListener('loadingdone', fontsLoaded)
+    }
+  }, [canvasRef, svgTextRef])
 
   return (
     <Fragment>

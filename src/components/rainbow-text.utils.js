@@ -22,15 +22,18 @@ const B = (x, y, t) =>
         ),
   )
 
-let t = 0
-export const startAnimation = (context, setReqId) => {
-  for (let x = 0; x <= 35; x++) {
-    for (let y = 0; y <= 35; y++) {
-      col(x, y, R(x, y, t), G(x, y, t), B(x, y, t), context)
+export const startAnimation = context => {
+  let t = 0
+
+  const intervalId = setInterval(() => {
+    for (let x = 0; x <= 35; x++) {
+      for (let y = 0; y <= 35; y++) {
+        col(x, y, R(x, y, t), G(x, y, t), B(x, y, t), context)
+      }
     }
+    t = t + 0.04
+  }, 1000 / 60)
+  return () => {
+    clearInterval(intervalId)
   }
-  t = t + 0.04
-  setReqId(
-    window.requestAnimationFrame(() => startAnimation(context, setReqId)),
-  )
 }
