@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
-@import url(https://fonts.googleapis.com/css?family=Knewave);
 /* @font-face {
   font-family: "MontserratBlack";
   src: url(/assets/fonts/Montserrat-Black.ttf) format("truetype"),
@@ -16,7 +15,4 @@
  /* Used as classname for svg text path */
  /* Refrence of this class in clip path */
  /* Styles wont work here because the id is concatenated with text */
-}
-
-.svgText {
 }
