@@ -23,14 +23,14 @@ const B = (x, y, t) =>
   )
 
 let t = 0
-let animReq
-export const startAnimation = context => {
+export const startAnimation = (context, setReqId) => {
   for (let x = 0; x <= 35; x++) {
     for (let y = 0; y <= 35; y++) {
       col(x, y, R(x, y, t), G(x, y, t), B(x, y, t), context)
     }
   }
   t = t + 0.04
-  if (animReq) window.cancelAnimationFrame(animReq)
-  animReq = window.requestAnimationFrame(() => startAnimation(context))
+  setReqId(
+    window.requestAnimationFrame(() => startAnimation(context, setReqId)),
+  )
 }

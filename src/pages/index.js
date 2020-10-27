@@ -20,7 +20,7 @@ const Home = () => {
           minHeight: '100vh',
         }}
       >
-        <RainbowText text="trugamr" fontSize={80} />
+        <RainbowText text="trugamr" fontSize={60} />
       </main>
     </div>
   )
