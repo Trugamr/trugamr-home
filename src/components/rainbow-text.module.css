@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+
+.canvas {
+  width: 400px;
+  height: 80px;
+}
+
+#svgTextPath  {
+ /* Used as classname for svg text path */
+ /* Refrence of this class in clip path */
+}
