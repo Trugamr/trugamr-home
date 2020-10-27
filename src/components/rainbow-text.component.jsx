@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, Fragment } from 'react'
 import { startAnimation } from './rainbow-text.utils'
 import styles from './rainbow-text.module.css'
 
@@ -33,7 +33,7 @@ const RainbowText = ({ fontSize = 30, text = '🌈rainbow' }) => {
   }, [canvasRef, svgTextRef])
 
   return (
-    <>
+    <Fragment>
       <canvas
         className={styles.canvas}
         ref={canvasRef}
@@ -59,7 +59,7 @@ const RainbowText = ({ fontSize = 30, text = '🌈rainbow' }) => {
           </clippath>
         </defs>
       </svg>
-    </>
+    </Fragment>
   )
 }
 
