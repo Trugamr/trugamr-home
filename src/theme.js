@@ -1,5 +1,9 @@
-import { dark } from '@theme-ui/presets'
+import { deep } from '@theme-ui/presets'
 
 export default {
-  ...dark,
+  // ...deep,
+  colors: {
+    ...deep.colors,
+    background: '#0d0d15',
+  },
 }

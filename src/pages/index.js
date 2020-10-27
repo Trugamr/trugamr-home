@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
 import Head from 'next/head'
 import RainbowText from 'components/rainbow-text.component'
 
@@ -5,14 +7,20 @@ const Home = () => {
   return (
     <div>
       <Head>
-        <title>^_^</title>
+        <title>trugamr</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1>Hello</h1>
-        <p>ji</p>
-        <RainbowText />
+      <main
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          minHeight: '100vh',
+        }}
+      >
+        <RainbowText text="trugamr" fontSize={56} />
       </main>
     </div>
   )
