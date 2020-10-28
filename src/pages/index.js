@@ -6,7 +6,11 @@ import SpotifyPlaying from 'components/spotify-playing.component'
 
 const Home = () => {
   return (
-    <div>
+    <div
+      sx={{
+        height: '100vh',
+      }}
+    >
       <Head>
         <title>trugamr</title>
         <link rel="icon" href="/favicon.ico" />
@@ -15,14 +19,23 @@ const Home = () => {
       <main
         sx={{
           display: 'flex',
+          position: 'relative',
           justifyContent: 'center',
           alignItems: 'center',
           flexDirection: 'column',
-          minHeight: '100vh',
+          height: '100%',
         }}
       >
         <RainbowText text="trugamr" fontSize={60} />
-        <SpotifyPlaying />
+        <div
+          sx={{
+            position: 'absolute',
+            right: 16,
+            bottom: 16,
+          }}
+        >
+          <SpotifyPlaying />
+        </div>
       </main>
     </div>
   )

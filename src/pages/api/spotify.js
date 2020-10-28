@@ -11,12 +11,12 @@ const {
 
 // TODO: Implement redis cache
 let accessToken =
-  'BQA9B3kHiP5fc1FwmEs-JudoxZW_2dKnsnWSYAigCuFti3jYavk8BKdcmmh---u6jMu4S82CDBdjUzYkhDXGKLXwxqv_s63F1-XlTdGAN-gDMKHXkg2glFn6YB6I3hiLVcJ1KhLUtkfLEbR5tI1kCh5Gd1sEog'
+  'BQA9B3kHiP5fc1FwmEs-JudoxZW_2dxnsnWSYAigCuFti3jYavk8BKdcmmh---u6jMu4S82CDBdjUzYkhDXGKLXwxqv_s63F1-XlTdGAN-gDMKHXkg2glFn6YB6I3hiLVcJ1KhLUtkfLEbR5tI1kCh5Gd1sEog'
 
 const spotify = axios.create({
   baseURL: 'https://api.spotify.com/v1',
   headers: {
-    authorization: `Bearer ${'xd'}`,
+    authorization: `Bearer ${accessToken}`,
   },
 })
 
@@ -53,7 +53,7 @@ const handler = nc().get(async (req, res) => {
       is_playing,
       currently_playing_type,
       progress_ms,
-      item: { album, artists, name },
+      item: { album, artists, name, external_urls },
     } = response.data
     const { duration_ms, id, name: albumName, uri, images } = album
 
@@ -68,6 +68,7 @@ const handler = nc().get(async (req, res) => {
         id,
         images,
         albumName,
+        url: external_urls.spotify,
         artists: artists.map(({ id, name, type, uri }) => ({
           id,
           name,

@@ -1,8 +1,37 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import useSwr from 'swr'
+import axios from 'axios'
 import { FaSpotify } from 'react-icons/fa'
 
+const fetchNowPlaying = async () => {
+  const response = await axios.get('/api/spotify')
+  const { data } = response.data
+  return data
+}
+
+const formatArtistsName = artists =>
+  artists.reduce(
+    (acc, artist, index) =>
+      (acc += `${artist.name}${artists.length === index + 1 ? '' : ', '}`),
+    '',
+  )
+
 const SpotifyPlaying = () => {
+  const { data, error } = useSwr('/api/spotify', fetchNowPlaying)
+
+  // Failed to get spotify data
+  if (error) {
+    console.log('Failed to load spotify widget', error)
+    return <h3>Error</h3>
+  }
+
+  // Loading
+  if (!data) return <h3>Loading</h3>
+
+  // TODO: Do something with isPlaying
+  const { albumName, name, artists, images, url } = data
+
   return (
     <div
       sx={{
@@ -20,7 +49,7 @@ const SpotifyPlaying = () => {
           height: 76,
           borderRadius: 14,
         }}
-        src="https://i.scdn.co/image/ab67616d00001e023fc1efbe18d69f86b4c9145d"
+        src={images[1]['url']}
       />
       <div
         sx={{
@@ -44,7 +73,7 @@ const SpotifyPlaying = () => {
             fontSize: 17,
           }}
         >
-          Mellow
+          {name}
         </span>
         <span
           sx={{
@@ -53,10 +82,10 @@ const SpotifyPlaying = () => {
             whiteSpace: 'nowrap',
             fontSize: 14,
             color: '#E1E1E1',
-            paddingRight: 10,
+            paddingRight: 20,
           }}
         >
-          The Lightyears Explode
+          {formatArtistsName(artists)}
         </span>
         <span
           sx={{
@@ -65,21 +94,23 @@ const SpotifyPlaying = () => {
             whiteSpace: 'nowrap',
             fontSize: 14,
             color: '#D8D8D8',
-            paddingRight: 20,
+            paddingRight: 30,
           }}
         >
-          Mello
+          {albumName === name ? 'Single' : albumName}
         </span>
       </div>
-      <FaSpotify
-        sx={{
-          position: 'absolute',
-          right: 12,
-          bottom: 12,
-        }}
-        color="#1DB954"
-        size={18}
-      />
+      <a target="_blank" href={url}>
+        <FaSpotify
+          sx={{
+            position: 'absolute',
+            right: 12,
+            bottom: 12,
+          }}
+          color="#1DB954"
+          size={18}
+        />
+      </a>
     </div>
   )
 }
