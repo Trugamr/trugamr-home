@@ -1,7 +1,7 @@
 import { deep } from '@theme-ui/presets'
 
 export default {
-  // ...deep,
+  ...deep,
   colors: {
     ...deep.colors,
     background: '#0d0d15',

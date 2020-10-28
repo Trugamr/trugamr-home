@@ -1,3 +1,9 @@
+export const hashCode = s =>
+  s.split('').reduce((a, b) => {
+    a = (a << 5) - a + b.charCodeAt(0)
+    return a & a
+  }, 0)
+
 const col = (x, y, r, g, b, context) => {
   context.fillStyle = 'rgb(' + r + ',' + g + ',' + b + ')'
   context.fillRect(x, y, 1, 1)
@@ -33,7 +39,7 @@ export const startAnimation = context => {
     }
     t = t + 0.04
   }, 1000 / 60)
-  return () => {
-    clearInterval(intervalId)
-  }
+
+  // clearInterval can be use to stop animation
+  return intervalId
 }

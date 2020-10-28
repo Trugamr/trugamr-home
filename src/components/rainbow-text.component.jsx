@@ -1,21 +1,30 @@
 import { useRef, useEffect, Fragment, useState } from 'react'
-import { startAnimation } from './rainbow-text.utils'
+import { startAnimation, hashCode } from './rainbow-text.utils'
 import styles from './rainbow-text.module.css'
 
-const RainbowText = ({ fontSize = 30, text = '🌈rainbow' }) => {
+const RainbowText = ({
+  fontSize = 30,
+  text = '🌈rainbow',
+  fontFamily = 'Montserrat, sans-serif',
+  fontWeight = 900,
+}) => {
   const canvasRef = useRef(null)
   const svgTextRef = useRef(null)
-  const [stopAnimation, setStopAnimation] = useState(null)
-  const clipPathId = `${styles.svgTextPath}-${text.replace(
-    /\s+/g, // replace spaces with - (space breaks id name)
-    '-',
-  )}-${fontSize}`
-  // Function variable to save stopAnimation function
+  const [animId, setAnimId] = useState(null)
+  const stopAnimation = () => clearInterval(animId)
+
+  // Generate hashed id name for having diff clippaths for diff canvas
+  const clipPathId = `rainbow_text-${hashCode(`${text}-${fontSize}`)}`
 
   // Set canvas width and height based on text dimensions
   const setCanvasDimensions = (canvas, svgText) => {
     // Get width, height, x and y positions for svg text
-    const { x, y, width: textWidth, height: textHeight } = svgText.getBBox()
+    const {
+      width: textWidth,
+      height: textHeight,
+    } = svgTextRef.current.getBBox()
+
+    const s = document.querySelector(`#${clipPathId}`)
 
     // Set canvas size according to text width and height
     canvas.style.width = `${textWidth}px`
@@ -33,12 +42,22 @@ const RainbowText = ({ fontSize = 30, text = '🌈rainbow' }) => {
     setCanvasDimensions(canvas, svgText)
 
     // Start animation by passing the context
-    // This returns a stop an imation function (clears the setInterval call)
-    if (!stopAnimation) {
-      setStopAnimation(() => startAnimation(context))
+    // This returns a setInterval id (used to clear setInterval call)
+    if (animId === null) {
+      setAnimId(startAnimation(context))
     }
 
+    return () => stopAnimation
+
     // Montserrat font loaded
+  }, [canvasRef, svgTextRef, text, fontSize, fontWeight, fontFamily, animId])
+
+  // Preload font and recalculate canvas dimensions
+  useEffect(() => {
+    // Get canvas ref and 2d context
+    const canvas = canvasRef.current
+    const svgText = svgTextRef.current
+
     // Change font and recalculate width and height of canvas
     const fontsLoaded = () => setCanvasDimensions(canvas, svgText)
     document.fonts.addEventListener('loadingdone', fontsLoaded)
@@ -47,16 +66,7 @@ const RainbowText = ({ fontSize = 30, text = '🌈rainbow' }) => {
     return () => {
       document.fonts.removeEventListener('loadingdone', fontsLoaded)
     }
-  }, [canvasRef, svgTextRef])
-
-  // If text changes recalcuate dimensions
-  useEffect(() => {
-    // Get canvas ref and 2d context
-    const canvas = canvasRef.current
-    const svgText = svgTextRef.current
-    console.log(text, 'called')
-    setCanvasDimensions(canvas, svgText)
-  }, [text])
+  }, [])
 
   return (
     <Fragment>
@@ -68,19 +78,17 @@ const RainbowText = ({ fontSize = 30, text = '🌈rainbow' }) => {
         style={{ clipPath: `url(#${clipPathId})` }}
       ></canvas>
       <svg height="0" width="0">
-        <defs>
-          <clippath id={clipPathId}>
-            <text
-              className={styles.svgText}
-              ref={svgTextRef}
-              fontWeight={900}
-              style={{ fontFamily: 'Montserrat, sans-serif' }}
-              fontSize={fontSize}
-            >
-              {text}
-            </text>
-          </clippath>
-        </defs>
+        <clipPath id={clipPathId}>
+          <text
+            className={styles.svgText}
+            ref={svgTextRef}
+            fontWeight={fontWeight}
+            style={{ fontFamily }}
+            fontSize={fontSize}
+          >
+            {text}
+          </text>
+        </clipPath>
       </svg>
     </Fragment>
   )
