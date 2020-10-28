@@ -10,7 +10,8 @@ const {
 } = process.env
 
 // TODO: Implement redis cache
-let accessToken = ''
+let accessToken =
+  'BQA9B3kHiP5fc1FwmEs-JudoxZW_2dKnsnWSYAigCuFti3jYavk8BKdcmmh---u6jMu4S82CDBdjUzYkhDXGKLXwxqv_s63F1-XlTdGAN-gDMKHXkg2glFn6YB6I3hiLVcJ1KhLUtkfLEbR5tI1kCh5Gd1sEog'
 
 const spotify = axios.create({
   baseURL: 'https://api.spotify.com/v1',

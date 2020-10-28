@@ -2,6 +2,7 @@
 import { jsx } from 'theme-ui'
 import Head from 'next/head'
 import RainbowText from 'components/rainbow-text.component'
+import SpotifyPlaying from 'components/spotify-playing.component'
 
 const Home = () => {
   return (
@@ -21,6 +22,7 @@ const Home = () => {
         }}
       >
         <RainbowText text="trugamr" fontSize={60} />
+        <SpotifyPlaying />
       </main>
     </div>
   )

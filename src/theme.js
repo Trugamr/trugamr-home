@@ -5,5 +5,6 @@ export default {
   colors: {
     ...deep.colors,
     background: '#0d0d15',
+    muted: '#161623',
   },
 }

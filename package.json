@@ -14,7 +14,9 @@
     "next-connect": "^0.9.1",
     "qs": "^6.9.4",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-icons": "^3.11.0",
+    "swr": "^0.3.6"
   },
   "devDependencies": {
     "@theme-ui/presets": "^0.3.0",
