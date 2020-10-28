@@ -49,6 +49,9 @@ createAuthRefreshInterceptor(spotify, accessTokenRefresh)
 const handler = nc().get(async (req, res) => {
   try {
     const response = await spotify.get('/me/player/currently-playing')
+
+    if (!response.data) return res.json({ data: { isOffline: true } })
+
     const {
       is_playing,
       currently_playing_type,
@@ -59,6 +62,7 @@ const handler = nc().get(async (req, res) => {
 
     res.json({
       data: {
+        isOffline: false,
         isPlaying: is_playing,
         currentlyPlayingType: currently_playing_type,
         durationMs: duration_ms,

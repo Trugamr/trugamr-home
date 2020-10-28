@@ -2,7 +2,7 @@
 import { jsx } from 'theme-ui'
 import useSwr from 'swr'
 import axios from 'axios'
-import { FaSpotify } from 'react-icons/fa'
+import { FaSpotify, FaOfflin } from 'react-icons/fa'
 
 const fetchNowPlaying = async () => {
   const response = await axios.get('/api/spotify')
@@ -23,11 +23,16 @@ const SpotifyPlaying = () => {
   // Failed to get spotify data
   if (error) {
     console.log('Failed to load spotify widget', error)
-    return <h3>Error</h3>
+    return <span></span>
+  }
+
+  // Spotify returns no data when nothing is playing
+  if (data?.isOffline) {
+    return <span></span>
   }
 
   // Loading
-  if (!data) return <h3>Loading</h3>
+  if (!data) return <span></span>
 
   // TODO: Do something with isPlaying
   const { albumName, name, artists, images, url } = data
