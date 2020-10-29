@@ -38,8 +38,11 @@ const SpotifyPlaying = ({ data, forceRefresh }) => {
   }, [progressMs])
 
   useEffect(() => {
-    if (progress >= durationMs + 2000) forceRefresh()
-    const timeoutId = setTimeout(() => setProgress(progress + 1000), 1000)
+    if (progress >= durationMs) forceRefresh()
+
+    const timeoutId = setTimeout(() => {
+      setProgress(progress < durationMs ? progress + 1000 : progress)
+    }, 1000)
     return () => clearTimeout(timeoutId)
   }, [progress])
 

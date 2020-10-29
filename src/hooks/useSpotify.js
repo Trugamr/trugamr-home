@@ -12,10 +12,6 @@ const useSpotify = (refreshInterval = 60000) => {
     refreshInterval,
   })
 
-  if (data && data.isOffline) {
-    error = 'Nothing is being played'
-  }
-
   return { data, error, forceRefresh: () => mutate('/api/spotify') }
 }
 

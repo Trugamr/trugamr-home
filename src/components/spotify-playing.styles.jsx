@@ -76,31 +76,16 @@ export const SpotifyLink = styled.a`
   display: flex;
 `
 
-export const Progress = styled.progress`
-  /* Reset the default appearance */
-  -webkit-appearance: none;
-  appearance: none;
+export const Progress = styled.div`
+  position: 'absolute';
   width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
   height: 100%;
-  border-radius: 20px;
-
-  &[value] {
-    ::-webkit-progress-bar {
-      border-radius: 20px;
-      background-color: transparent;
-    }
-
-    ::-webkit-progress-value {
-      overflow: hidden;
-      background: linear-gradient(
-        to right,
-        ${({ theme }) => theme.colors.primary} 90%,
-        transparent 100%
-      );
-      opacity: 0.1;
-    }
-  }
+  background: linear-gradient(
+    to right,
+    ${({ theme }) => theme.colors.primary} 90%,
+    transparent 100%
+  );
+  opacity: 0.15;
+  transition: linear all 1000ms;
+  transform: translateX(${({ value, max }) => (value / max) * 100 - 100}%);
 `
