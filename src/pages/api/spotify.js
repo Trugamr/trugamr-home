@@ -38,6 +38,9 @@ const accessTokenRefresh = async failedReq => {
 
   const { access_token } = response.data
   accessToken = access_token
+
+  // Upadating Authorization headers for axios instance and failed req
+  spotify.defaults.headers['authorization'] = `Bearer ${accessToken}`
   failedReq.config.headers['authorization'] = `Bearer ${accessToken}`
 
   return Promise.resolve()
@@ -85,7 +88,7 @@ const handler = nc().get(async (req, res) => {
     res.status(501).json({
       error: 'Something went wrong',
     })
-    console.log('ERROR', error, error.response)
+    console.log('ERROR', error)
   }
 })
 
