@@ -992,7 +992,7 @@
     "@emotion/utils" "0.11.3"
     "@emotion/weak-memoize" "0.2.5"
 
-"@emotion/core@^10.0.0":
+"@emotion/core@^10.0.0", "@emotion/core@^10.0.35":
   "integrity" "sha512-sH++vJCdk025fBlRZSAhkRlSUoqSqgCzYf5fMOmqqi3bM6how+sQpg3hkgJonj8GxXM4WbD7dRO+4tegDB9fUw=="
   "resolved" "https://registry.npmjs.org/@emotion/core/-/core-10.0.35.tgz"
   "version" "10.0.35"
@@ -1056,7 +1056,7 @@
     "@emotion/serialize" "^0.11.15"
     "@emotion/utils" "0.11.3"
 
-"@emotion/styled@^10.0.0":
+"@emotion/styled@^10.0.0", "@emotion/styled@^10.0.27":
   "integrity" "sha512-iK/8Sh7+NLJzyp9a5+vIQIXTYxfT4yB/OJbjzQanB2RZpvmzBQOHZWhpAMZWYEKRNNbsD6WfBw5sVWkb6WzS/Q=="
   "resolved" "https://registry.npmjs.org/@emotion/styled/-/styled-10.0.27.tgz"
   "version" "10.0.27"

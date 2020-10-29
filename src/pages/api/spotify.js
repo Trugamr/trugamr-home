@@ -56,9 +56,9 @@ const handler = nc().get(async (req, res) => {
       is_playing,
       currently_playing_type,
       progress_ms,
-      item: { album, artists, name, external_urls },
+      item: { album, artists, name, external_urls, duration_ms },
     } = response.data
-    const { duration_ms, id, name: albumName, uri, images } = album
+    const { id, name: albumName, uri, images } = album
 
     res.json({
       data: {

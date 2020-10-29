@@ -1,122 +1,63 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import useSwr from 'swr'
-import axios from 'axios'
-import { FaSpotify, FaOfflin } from 'react-icons/fa'
+import { useState, useEffect } from 'react'
+import { FaSpotify } from 'react-icons/fa'
+import {
+  Container,
+  Wrapper,
+  Artwork,
+  Info,
+  SpotifyLink,
+  Progress,
+} from './spotify-playing.styles'
 
-const fetchNowPlaying = async () => {
-  const response = await axios.get('/api/spotify')
-  const { data } = response.data
-  return data
-}
-
-const formatArtistsName = artists =>
-  artists.reduce(
+const formatArtistsName = artists => {
+  const arr = artists.slice(0, 2)
+  return arr.reduce(
     (acc, artist, index) =>
-      (acc += `${artist.name}${artists.length === index + 1 ? '' : ', '}`),
+      (acc += `${artist.name}${arr.length === index + 1 ? '' : ', '}`),
     '',
   )
+}
 
-const SpotifyPlaying = () => {
-  const { data, error } = useSwr('/api/spotify', fetchNowPlaying)
+const SpotifyPlaying = ({ data, forceRefresh }) => {
+  const {
+    albumName,
+    name,
+    artists,
+    images,
+    url,
+    progressMs,
+    durationMs,
+    isPlaying,
+  } = data
+  const [progress, setProgress] = useState(progressMs)
 
-  // Failed to get spotify data
-  if (error) {
-    console.log('Failed to load spotify widget', error)
-    return <span></span>
-  }
+  useEffect(() => {
+    setProgress(progressMs)
+  }, [progressMs])
 
-  // Spotify returns no data when nothing is playing
-  if (data?.isOffline) {
-    return <span></span>
-  }
-
-  // Loading
-  if (!data) return <span></span>
-
-  // TODO: Do something with isPlaying
-  const { albumName, name, artists, images, url } = data
+  useEffect(() => {
+    if (progress >= durationMs + 2000) forceRefresh()
+    const timeoutId = setTimeout(() => setProgress(progress + 1000), 1000)
+    return () => clearTimeout(timeoutId)
+  }, [progress])
 
   return (
-    <div
-      sx={{
-        backgroundColor: 'muted',
-        position: 'relative',
-        width: 300,
-        height: 100,
-        borderRadius: 20,
-        padding: 12,
-        display: 'flex',
-      }}
-    >
-      <img
-        sx={{
-          height: 76,
-          borderRadius: 14,
-        }}
-        src={images[1]['url']}
-      />
-      <div
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          fontFamily: 'Montserrat',
-          fontWeight: '500',
-          flexGrow: 1,
-          paddingLeft: 12,
-          width: 100,
-          justifyContent: 'center',
-        }}
-      >
-        <span
-          sx={{
-            margin: 0,
-            fontWeight: '600',
-            textOverflow: 'ellipsis',
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            fontSize: 17,
-          }}
-        >
-          {name}
-        </span>
-        <span
-          sx={{
-            textOverflow: 'ellipsis',
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            fontSize: 14,
-            color: '#E1E1E1',
-            paddingRight: 20,
-          }}
-        >
-          {formatArtistsName(artists)}
-        </span>
-        <span
-          sx={{
-            textOverflow: 'ellipsis',
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            fontSize: 14,
-            color: '#D8D8D8',
-            paddingRight: 30,
-          }}
-        >
-          {albumName === name ? 'Single' : albumName}
-        </span>
-      </div>
-      <a target="_blank" href={url}>
-        <FaSpotify
-          sx={{
-            position: 'absolute',
-            right: 12,
-            bottom: 12,
-          }}
-          color="#1DB954"
-          size={18}
-        />
-      </a>
-    </div>
+    <Wrapper>
+      {isPlaying && <Progress value={progress} max={durationMs} />}
+      <Container>
+        <Artwork src={images[1]['url']} />
+        <Info>
+          <p>{name}</p>
+          <span>{formatArtistsName(artists)}</span>
+          <span>{albumName === name ? 'Single' : albumName}</span>
+        </Info>
+        <SpotifyLink target="_blank" href={url}>
+          <FaSpotify color="#1DB954" size={18} />
+        </SpotifyLink>
+      </Container>
+    </Wrapper>
   )
 }
 

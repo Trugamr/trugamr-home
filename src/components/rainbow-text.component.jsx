@@ -1,6 +1,5 @@
 import { useRef, useEffect, Fragment, useState } from 'react'
 import { startAnimation, hashCode } from './rainbow-text.utils'
-import styles from './rainbow-text.module.css'
 
 const RainbowText = ({
   fontSize = 30,
@@ -53,6 +52,7 @@ const RainbowText = ({
   }, [canvasRef, svgTextRef, text, fontSize, fontWeight, fontFamily, animId])
 
   // Preload font and recalculate canvas dimensions
+  // Not needed incase fonts are preloaded
   useEffect(() => {
     // Get canvas ref and 2d context
     const canvas = canvasRef.current
@@ -71,7 +71,6 @@ const RainbowText = ({
   return (
     <Fragment>
       <canvas
-        className={styles.canvas}
         ref={canvasRef}
         height={32}
         width={32}
@@ -80,7 +79,6 @@ const RainbowText = ({
       <svg height="0" width="0">
         <clipPath id={clipPathId}>
           <text
-            className={styles.svgText}
             ref={svgTextRef}
             fontWeight={fontWeight}
             style={{ fontFamily }}
