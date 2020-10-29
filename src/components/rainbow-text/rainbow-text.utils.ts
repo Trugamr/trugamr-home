@@ -1,24 +1,31 @@
-export const hashCode = s =>
+export const hashCode = (s: string) =>
   s.split('').reduce((a, b) => {
     a = (a << 5) - a + b.charCodeAt(0)
     return a & a
   }, 0)
 
-const col = (x, y, r, g, b, context) => {
+const col = (
+  x: number,
+  y: number,
+  r: number,
+  g: number,
+  b: number,
+  context: CanvasRenderingContext2D,
+) => {
   context.fillStyle = 'rgb(' + r + ',' + g + ',' + b + ')'
   context.fillRect(x, y, 1, 1)
 }
 
-const R = (x, y, t) =>
+const R = (x: number, y: number, t: number) =>
   Math.floor(192 + 64 * Math.cos((x * x - y * y) / 300 + t))
 
-const G = (x, y, t) =>
+const G = (x: number, y: number, t: number) =>
   Math.floor(
     192 +
       64 * Math.sin((x * x * Math.cos(t / 4) + y * y * Math.sin(t / 3)) / 300),
   )
 
-const B = (x, y, t) =>
+const B = (x: number, y: number, t: number) =>
   Math.floor(
     192 +
       64 *
@@ -28,7 +35,9 @@ const B = (x, y, t) =>
         ),
   )
 
-export const startAnimation = context => {
+export const startAnimation = (
+  context: CanvasRenderingContext2D,
+): NodeJS.Timeout => {
   let t = 0
 
   const intervalId = setInterval(() => {

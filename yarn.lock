@@ -1383,12 +1383,49 @@
   "resolved" "https://registry.npmjs.org/@types/q/-/q-1.5.4.tgz"
   "version" "1.5.4"
 
-"@types/react@^16.9.53":
+"@types/react@*", "@types/react@^16.9.53":
   "integrity" "sha512-4nW60Sd4L7+WMXH1D6jCdVftuW7j4Za6zdp6tJ33Rqv0nk1ZAmQKML9ZLD4H0dehA3FZxXR/GM8gXplf82oNGw=="
   "resolved" "https://registry.npmjs.org/@types/react/-/react-16.9.53.tgz"
   "version" "16.9.53"
   dependencies:
     "@types/prop-types" "*"
+    "csstype" "^3.0.2"
+
+"@types/styled-system__css@*":
+  "integrity" "sha512-dvhSQ5upz6TqiQmWLNF0sqdoL5nTomza58vtTSklpE9lDS+5w/ew8PQ+HPSRaXMGrmPGUiL7F0vwryVdxHWfpA=="
+  "resolved" "https://registry.npmjs.org/@types/styled-system__css/-/styled-system__css-5.0.14.tgz"
+  "version" "5.0.14"
+  dependencies:
+    "csstype" "^3.0.2"
+
+"@types/styled-system@*":
+  "integrity" "sha512-OmVjC9OzyUckAgdavJBc+t5oCJrNXTlzWl9vo2x47leqpX1REq2qJC49SEtzbu1OnWSzcD68Uq3Aj8TeX+Kvtg=="
+  "resolved" "https://registry.npmjs.org/@types/styled-system/-/styled-system-5.1.10.tgz"
+  "version" "5.1.10"
+  dependencies:
+    "csstype" "^3.0.2"
+
+"@types/theme-ui__components@*":
+  "integrity" "sha512-i/tz/trP4iPcdokOJBSkI/KNR/0YkwLSuJZzEHdrWRtmCKa4MyY+hKcoN9YALq09Z/vYI2JYSEyBz3+N/zNwvg=="
+  "resolved" "https://registry.npmjs.org/@types/theme-ui__components/-/theme-ui__components-0.2.6.tgz"
+  "version" "0.2.6"
+  dependencies:
+    "@emotion/core" "^10.0.0"
+    "@emotion/styled" "^10.0.0"
+    "@types/react" "*"
+    "@types/styled-system" "*"
+    "@types/theme-ui" "*"
+
+"@types/theme-ui@*", "@types/theme-ui@^0.3.7":
+  "integrity" "sha512-4hzDlDhlFYmOdXBLZTbO4N2hWfuGo1N77AcIMaSyDGEyFbdZSpelMLTkEtNzYT8yQWIl3x0WITiBzjqkfc6dUg=="
+  "resolved" "https://registry.npmjs.org/@types/theme-ui/-/theme-ui-0.3.7.tgz"
+  "version" "0.3.7"
+  dependencies:
+    "@emotion/serialize" "^0.11.15"
+    "@types/react" "*"
+    "@types/styled-system" "*"
+    "@types/styled-system__css" "*"
+    "@types/theme-ui__components" "*"
     "csstype" "^3.0.2"
 
 "@webassemblyjs/ast@1.9.0":

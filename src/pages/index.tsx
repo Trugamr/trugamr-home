@@ -2,8 +2,8 @@
 import { jsx } from 'theme-ui'
 import Head from 'next/head'
 import useSpotify from 'hooks/useSpotify'
-import RainbowText from 'components/rainbow-text.component'
-import SpotifyPlaying from 'components/spotify-playing.component'
+import RainbowText from 'components/rainbow-text/rainbow-text.component'
+import SpotifyPlaying from 'components/spotify-playing/spotify-playing.component'
 
 const Home = () => {
   const { data: spotifyData, error, forceRefresh } = useSpotify()

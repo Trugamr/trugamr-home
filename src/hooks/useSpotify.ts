@@ -1,7 +1,7 @@
 import useSwr, { mutate } from 'swr'
 import axios from 'axios'
 
-const fetchNowPlaying = async () => {
+const fetchNowPlaying : () => Promise<SpotifyData> = async () => {
   const response = await axios.get('/api/spotify')
   const { data } = response.data
   return data

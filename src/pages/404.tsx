@@ -3,10 +3,10 @@ import { jsx } from 'theme-ui'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import RainbowText from 'components/rainbow-text.component.jsx'
-import { useEffect } from 'react'
+import RainbowText from 'components/rainbow-text/rainbow-text.component'
+import { FunctionComponent, useEffect } from 'react'
 
-const NotFound = () => {
+const NotFound: FunctionComponent = () => {
   const router = useRouter()
   useEffect(() => {
     const timeoutId = setTimeout(() => router.push('/'), 4000)

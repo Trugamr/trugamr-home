@@ -2,6 +2,7 @@ import nc from 'next-connect'
 import axios from 'axios'
 import qs from 'qs'
 import createAuthRefreshInterceptor from 'axios-auth-refresh'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 const {
   SPOTIFY_REFRESH_TOKEN,
@@ -9,7 +10,6 @@ const {
   SPOTIFY_CLIENT_SECRET,
 } = process.env
 
-// TODO: Implement redis cache
 let accessToken =
   'BQA9B3kHiP5fc1FwmEs-JudoxZW_2dxnsnWSYAigCuFti3jYavk8BKdcmmh---u6jMu4S82CDBdjUzYkhDXGKLXwxqv_s63F1-XlTdGAN-gDMKHXkg2glFn6YB6I3hiLVcJ1KhLUtkfLEbR5tI1kCh5Gd1sEog'
 
@@ -49,7 +49,7 @@ const accessTokenRefresh = async failedReq => {
 // Add interceptor to spotify axios instance
 createAuthRefreshInterceptor(spotify, accessTokenRefresh)
 
-const handler = nc().get(async (req, res) => {
+const handler = nc().get(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const response = await spotify.get('/me/player/currently-playing')
 
@@ -63,26 +63,28 @@ const handler = nc().get(async (req, res) => {
     } = response.data
     const { id, name: albumName, uri, images } = album
 
-    res.json({
-      data: {
-        isOffline: false,
-        isPlaying: is_playing,
-        currentlyPlayingType: currently_playing_type,
-        durationMs: duration_ms,
-        progressMs: progress_ms,
-        name,
-        uri,
+    const spotifyData: SpotifyData = {
+      isOffline: false,
+      isPlaying: is_playing,
+      currentlyPlayingType: currently_playing_type,
+      durationMs: duration_ms,
+      progressMs: progress_ms,
+      name,
+      uri,
+      id,
+      albumName,
+      images,
+      url: external_urls.spotify,
+      artists: (artists as Artist[]).map(({ id, name, type, uri }) => ({
         id,
-        images,
-        albumName,
-        url: external_urls.spotify,
-        artists: artists.map(({ id, name, type, uri }) => ({
-          id,
-          name,
-          type,
-          uri,
-        })),
-      },
+        name,
+        type,
+        uri,
+      })),
+    }
+
+    res.json({
+      data: spotifyData,
     })
   } catch (error) {
     res.status(501).json({

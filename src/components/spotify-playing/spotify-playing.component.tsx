@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FunctionComponent } from 'react'
 import { FaSpotify } from 'react-icons/fa'
 import {
   Container,
@@ -11,7 +11,12 @@ import {
   Progress,
 } from './spotify-playing.styles'
 
-const formatArtistsName = artists => {
+interface IProps {
+  data: SpotifyData
+  forceRefresh: () => Promise<any>
+}
+
+const formatArtistsName: (artists: Artist[]) => string = artists => {
   const arr = artists.slice(0, 2)
   return arr.reduce(
     (acc, artist, index) =>
@@ -20,7 +25,7 @@ const formatArtistsName = artists => {
   )
 }
 
-const SpotifyPlaying = ({ data, forceRefresh }) => {
+const SpotifyPlaying: FunctionComponent<IProps> = ({ data, forceRefresh }) => {
   const {
     albumName,
     name,

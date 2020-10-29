@@ -1,5 +1,13 @@
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
+import { Theme } from 'theme-ui'
+
+// Types
+interface ProgressProps {
+  value: number
+  max: number
+  theme: Theme
+}
 
 const ellipsisText = css`
   white-space: nowrap;
@@ -7,7 +15,7 @@ const ellipsisText = css`
   text-overflow: ellipsis;
 `
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ theme: Theme }>`
   width: 300px;
   height: 100px;
   position: relative;
@@ -27,7 +35,7 @@ export const Container = styled.div`
   position: absolute;
 `
 
-export const Artwork = styled.div`
+export const Artwork = styled.div<{ src: string }>`
   height: 76px;
   min-width: 76px;
   width: 76px;
@@ -76,7 +84,7 @@ export const SpotifyLink = styled.a`
   display: flex;
 `
 
-export const Progress = styled.div`
+export const Progress = styled.div<ProgressProps>`
   position: 'absolute';
   width: 100%;
   height: 100%;

@@ -1,6 +1,7 @@
 import { deep } from '@theme-ui/presets'
+import { Theme } from 'theme-ui'
 
-export default {
+const theme: Theme = {
   ...deep,
   colors: {
     ...deep.colors,
@@ -8,3 +9,5 @@ export default {
     muted: '#161623',
   },
 }
+
+export default theme

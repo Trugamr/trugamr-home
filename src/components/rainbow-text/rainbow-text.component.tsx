@@ -1,22 +1,43 @@
-import { useRef, useEffect, Fragment, useState } from 'react'
+import {
+  useRef,
+  useEffect,
+  Fragment,
+  useState,
+  FunctionComponent,
+  RefObject,
+  Dispatch,
+} from 'react'
 import { startAnimation, hashCode } from './rainbow-text.utils'
 
-const RainbowText = ({
+interface IProps {
+  fontSize?: number
+  text?: string
+  fontFamily?: string
+  fontWeight?: number
+}
+
+const RainbowText: FunctionComponent<IProps> = ({
   fontSize = 30,
   text = '🌈rainbow',
   fontFamily = 'Montserrat, sans-serif',
   fontWeight = 900,
 }) => {
-  const canvasRef = useRef(null)
-  const svgTextRef = useRef(null)
-  const [animId, setAnimId] = useState(null)
+  const canvasRef: RefObject<HTMLCanvasElement> = useRef(null)
+  const svgTextRef: RefObject<SVGTextElement> = useRef(null)
+  const [animId, setAnimId]: [
+    NodeJS.Timeout,
+    Dispatch<NodeJS.Timeout>,
+  ] = useState(null)
   const stopAnimation = () => clearInterval(animId)
 
   // Generate hashed id name for having diff clippaths for diff canvas
   const clipPathId = `rainbow_text-${hashCode(`${text}-${fontSize}`)}`
 
   // Set canvas width and height based on text dimensions
-  const setCanvasDimensions = (canvas, svgText) => {
+  const setCanvasDimensions = (
+    canvas: HTMLCanvasElement,
+    svgText: SVGTextElement,
+  ) => {
     // Get width, height, x and y positions for svg text
     const {
       width: textWidth,
@@ -28,7 +49,7 @@ const RainbowText = ({
     // Set canvas size according to text width and height
     canvas.style.width = `${textWidth}px`
     canvas.style.height = `${textHeight}px`
-    svgText.setAttribute('y', fontSize)
+    svgText.setAttribute('y', fontSize.toString())
   }
 
   useEffect(() => {
@@ -60,10 +81,12 @@ const RainbowText = ({
 
     // Change font and recalculate width and height of canvas
     const fontsLoaded = () => setCanvasDimensions(canvas, svgText)
+    // @ts-expect-error
     document.fonts.addEventListener('loadingdone', fontsLoaded)
 
     // Cleanup function
     return () => {
+      // @ts-expect-error
       document.fonts.removeEventListener('loadingdone', fontsLoaded)
     }
   }, [])
