@@ -93,12 +93,16 @@ const RainbowText: FunctionComponent<IProps> = ({
 
   return (
     <Fragment>
-      <canvas
-        ref={canvasRef}
-        height={32}
-        width={32}
-        style={{ clipPath: `url(#${clipPathId})` }}
-      ></canvas>
+      <div style={{ filter: 'drop-shadow(4px 4px 2px rgba(0, 0, 0, 0.1))' }}>
+        <canvas
+          ref={canvasRef}
+          height={32}
+          width={32}
+          style={{
+            clipPath: `url(#${clipPathId})`,
+          }}
+        ></canvas>
+      </div>
       <svg height="0" width="0">
         <clipPath id={clipPathId}>
           <text
