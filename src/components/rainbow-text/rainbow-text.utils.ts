@@ -21,14 +21,14 @@ const R = (x: number, y: number, t: number) =>
 
 const G = (x: number, y: number, t: number) =>
   Math.floor(
-    192 +
-      64 * Math.sin((x * x * Math.cos(t / 4) + y * y * Math.sin(t / 3)) / 300),
+    170 +
+      54 * Math.sin((x * x * Math.cos(t / 4) + y * y * Math.sin(t / 3)) / 300),
   )
 
 const B = (x: number, y: number, t: number) =>
   Math.floor(
-    192 +
-      64 *
+    170 +
+      54 *
         Math.sin(
           5 * Math.sin(t / 9) +
             ((x - 100) * (x - 100) + (y - 100) * (y - 100)) / 1100,

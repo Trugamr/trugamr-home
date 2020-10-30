@@ -16,7 +16,7 @@ const ellipsisText = css`
 `
 
 export const Wrapper = styled.div<{ theme: Theme }>`
-  width: 300px;
+  width: 100%;
   height: 100px;
   position: relative;
   display: flex;
@@ -90,7 +90,7 @@ export const Progress = styled.div<ProgressProps>`
   height: 100%;
   background: linear-gradient(
     to right,
-    ${({ theme }) => theme.spotify.progress} 94%,
+    ${({ theme }) => theme.spotify.progress} 90%,
     transparent 100%
   );
   opacity: 0.15;
