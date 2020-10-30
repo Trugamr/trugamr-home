@@ -1,6 +1,6 @@
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
-import { Theme } from 'theme-ui'
+import { Theme } from 'global'
 
 // Types
 interface ProgressProps {
@@ -20,7 +20,7 @@ export const Wrapper = styled.div<{ theme: Theme }>`
   height: 100px;
   position: relative;
   display: flex;
-  background-color: ${({ theme }) => theme.colors.muted};
+  background-color: ${({ theme }) => theme.spotify.background};
   border-radius: 20px;
   overflow: hidden;
 `
@@ -45,7 +45,7 @@ export const Artwork = styled.div<{ src: string }>`
   margin-right: 12px;
 `
 
-export const Info = styled.div`
+export const Info = styled.div<{ theme: Theme }>`
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -65,14 +65,14 @@ export const Info = styled.div`
     padding-right: 20px;
     font-size: 14px;
     ${ellipsisText};
-    color: #d0d0d0;
+    color: ${({ theme }) => theme.spotify.artist};
   }
 
   /* Album */
   span:nth-of-type(2) {
     padding-right: 30px;
-    font-size: 13px;
-    color: #e8e8e8;
+    font-size: 14px;
+    color: ${({ theme }) => theme.spotify.album};
     ${ellipsisText};
   }
 `
@@ -90,7 +90,7 @@ export const Progress = styled.div<ProgressProps>`
   height: 100%;
   background: linear-gradient(
     to right,
-    ${({ theme }) => theme.colors.primary} 90%,
+    ${({ theme }) => theme.spotify.progress} 94%,
     transparent 100%
   );
   opacity: 0.15;

@@ -1,8 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import { ThemeProvider } from 'theme-ui'
+import ThemeProvider from 'contexts/theme.context'
 import 'styles/globals.css'
-import theme from '../theme'
 import { FunctionComponent } from 'react'
 
 const App: FunctionComponent<{
@@ -10,7 +9,7 @@ const App: FunctionComponent<{
   pageProps: {}
 }> = ({ Component, pageProps }) => {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider>
       <Component {...pageProps} />
     </ThemeProvider>
   )

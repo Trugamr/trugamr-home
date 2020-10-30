@@ -4,6 +4,7 @@ import Head from 'next/head'
 import useSpotify from 'hooks/useSpotify'
 import RainbowText from 'components/rainbow-text/rainbow-text.component'
 import SpotifyPlaying from 'components/spotify-playing/spotify-playing.component'
+import useTheme from 'hooks/useTheme'
 
 const Home = () => {
   const { data: spotifyData, error, forceRefresh } = useSpotify()

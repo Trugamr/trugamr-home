@@ -5,6 +5,7 @@ html {
 
 *, *:before, *:after {
   box-sizing: inherit;
+  transition: ease-in-out background 100ms;
 }
 
 body, h1, h2, h3, h4, h5, h6, p, ol, ul {
