@@ -44,5 +44,3 @@ export const lightTheme: Theme = {
   colors: lightColors,
   spotify: lightSpotify,
 }
-
-console.log(lightTheme)

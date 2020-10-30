@@ -5,6 +5,7 @@ import useSpotify from 'hooks/useSpotify'
 import RainbowText from 'components/rainbow-text/rainbow-text.component'
 import SpotifyPlaying from 'components/spotify-playing/spotify-playing.component'
 import useTheme from 'hooks/useTheme'
+import Navbar from 'components/navbar/navbar.component'
 
 const Home = () => {
   const { data: spotifyData, error, forceRefresh } = useSpotify()
@@ -13,12 +14,16 @@ const Home = () => {
     <div
       sx={{
         height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       <Head>
         <title>trugamr</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <Navbar title="🌊🌸" />
 
       <main
         sx={{
@@ -28,6 +33,7 @@ const Home = () => {
           alignItems: 'center',
           flexDirection: 'column',
           height: '100%',
+          flexGrow: 1,
         }}
       >
         <RainbowText text="trugamr" fontSize={60} />

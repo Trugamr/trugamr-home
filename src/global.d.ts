@@ -1,6 +1,6 @@
 import { Theme as ThemeUITheme } from 'theme-ui'
 
-declare type ThemeTypes = 'light' | 'dark'
+type ThemeTypes = 'light' | 'dark'
 
 declare interface Theme extends ThemeUITheme {
   name: ThemeTypes

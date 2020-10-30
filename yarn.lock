@@ -2678,6 +2678,16 @@
   dependencies:
     "buffer-from" "^1.1.1"
 
+"date-fns-tz@^1.0.12":
+  "integrity" "sha512-Ca+9pjGkU90XDHnclfSjz9o7g/ZqyYyYI0aCYmbf65P75oy8gktuaRslO3UPXl3ADgAnF9/KCykQkpU3/xvtWQ=="
+  "resolved" "https://registry.npmjs.org/date-fns-tz/-/date-fns-tz-1.0.12.tgz"
+  "version" "1.0.12"
+
+"date-fns@^2.16.1", "date-fns@>=2.0.0-alpha.13":
+  "integrity" "sha512-sAJVKx/FqrLYHAQeN7VpJrPhagZc9R4ImZIWYRFZaaohR3KzmuK88touwsSwSVT8Qcbd4zoDsnGfX4GFB4imyQ=="
+  "resolved" "https://registry.npmjs.org/date-fns/-/date-fns-2.16.1.tgz"
+  "version" "2.16.1"
+
 "debug@^2.2.0":
   "integrity" "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="
   "resolved" "https://registry.npmjs.org/debug/-/debug-2.6.9.tgz"
