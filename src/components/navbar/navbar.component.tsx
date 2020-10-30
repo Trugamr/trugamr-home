@@ -11,9 +11,9 @@ interface IProps {
 const Navbar: FunctionComponent<IProps> = ({ title = '' }) => {
   return (
     <Wrapper>
-      <Container>
+      <Container sx={{ backgroundColor: 'muted' }}>
         <Left>
-          <Title>{title}</Title>
+          <Title sx={{ color: 'primary' }}>{title}</Title>
         </Left>
         <Middle></Middle>
         <Right>

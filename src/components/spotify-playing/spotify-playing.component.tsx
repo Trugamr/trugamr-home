@@ -52,14 +52,25 @@ const SpotifyPlaying: FunctionComponent<IProps> = ({ data, forceRefresh }) => {
   }, [progress])
 
   return (
-    <Wrapper>
-      {isPlaying && <Progress value={progress} max={durationMs} />}
+    <Wrapper sx={{ variant: 'spotify', backgroundColor: 'muted' }}>
+      {isPlaying && (
+        <Progress
+          sx={{
+            background: theme =>
+              `linear-gradient(to right, ${theme.colors.primary} 90%, transparent 100%)`,
+          }}
+          value={progress}
+          max={durationMs}
+        />
+      )}
       <Container>
         <Artwork src={images[1]['url']} />
         <Info>
           <p>{name}</p>
-          <span>{formatArtistsName(artists)}</span>
-          <span>{albumName === name ? 'Single' : albumName}</span>
+          <span sx={{ color: 'gray' }}>{formatArtistsName(artists)}</span>
+          <span sx={{ color: 'lightgray' }}>
+            {albumName === name ? 'Single' : albumName}
+          </span>
         </Info>
         <SpotifyLink target="_blank" href={url}>
           <FaSpotify color="#1DB954" size={18} />

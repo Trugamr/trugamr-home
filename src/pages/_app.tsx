@@ -1,15 +1,15 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
-import ThemeProvider from 'contexts/theme.context'
-import 'styles/globals.css'
+import { jsx, ThemeProvider } from 'theme-ui'
 import { FunctionComponent } from 'react'
+import theme from 'theme'
+import 'styles/globals.css'
 
 const App: FunctionComponent<{
   Component: FunctionComponent
   pageProps: {}
 }> = ({ Component, pageProps }) => {
   return (
-    <ThemeProvider>
+    <ThemeProvider theme={theme}>
       <Component {...pageProps} />
     </ThemeProvider>
   )

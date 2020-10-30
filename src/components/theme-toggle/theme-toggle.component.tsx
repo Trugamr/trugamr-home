@@ -1,17 +1,18 @@
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
 import { Container, Button } from './theme-toggle.styles'
 import { RiMoonClearFill, RiSunFill } from 'react-icons/ri'
-import useTheme from 'hooks/useTheme'
+import useThemeToggle from 'hooks/useThemeToggle'
 
 const ThemeToggle = () => {
-  const [theme, toggleTheme] = useTheme()
-
+  const { colorMode, toggleTheme } = useThemeToggle()
   return (
     <Container>
       <Button onClick={toggleTheme}>
-        {theme?.name === 'dark' ? (
-          <RiSunFill color={theme.colors.primary} size={20} />
+        {colorMode === 'dark' ? (
+          <RiSunFill sx={{ color: 'primary' }} size={20} />
         ) : (
-          <RiMoonClearFill color={theme.colors.primary} size={20} />
+          <RiMoonClearFill sx={{ color: 'primary' }} size={20} />
         )}
       </Button>
     </Container>

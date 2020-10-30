@@ -1,12 +1,10 @@
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
-import { Theme } from 'global'
 
 // Types
 interface ProgressProps {
   value: number
   max: number
-  theme: Theme
 }
 
 const ellipsisText = css`
@@ -15,12 +13,11 @@ const ellipsisText = css`
   text-overflow: ellipsis;
 `
 
-export const Wrapper = styled.div<{ theme: Theme }>`
+export const Wrapper = styled.div`
   width: 100%;
   height: 100px;
   position: relative;
   display: flex;
-  background-color: ${({ theme }) => theme.spotify.background};
   border-radius: 20px;
   overflow: hidden;
 `
@@ -45,7 +42,7 @@ export const Artwork = styled.div<{ src: string }>`
   margin-right: 12px;
 `
 
-export const Info = styled.div<{ theme: Theme }>`
+export const Info = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -65,14 +62,12 @@ export const Info = styled.div<{ theme: Theme }>`
     padding-right: 20px;
     font-size: 14px;
     ${ellipsisText};
-    color: ${({ theme }) => theme.spotify.artist};
   }
 
   /* Album */
   span:nth-of-type(2) {
     padding-right: 30px;
     font-size: 14px;
-    color: ${({ theme }) => theme.spotify.album};
     ${ellipsisText};
   }
 `
@@ -88,11 +83,6 @@ export const Progress = styled.div<ProgressProps>`
   position: 'absolute';
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to right,
-    ${({ theme }) => theme.spotify.progress} 90%,
-    transparent 100%
-  );
   opacity: 0.15;
   transition: linear all 1000ms;
   transform: translateX(${({ value, max }) => (value / max) * 100 - 100}%);
