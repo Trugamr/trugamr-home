@@ -90,7 +90,7 @@ const handler = nc().get(async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(501).json({
       error: 'Something went wrong',
     })
-    console.log('ERROR', error)
+    console.log('ERROR', error?.message)
   }
 })
 

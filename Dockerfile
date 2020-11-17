@@ -15,5 +15,7 @@ COPY .env.local /app
 RUN npm run-script build
 # Expose default port
 EXPOSE 3000
+# Set enviornment variables
+ENV SITE_URL https://trugamr.codes
 # Start listening to port 3000
 ENTRYPOINT ["npm", "start"]
