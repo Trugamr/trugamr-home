@@ -1,11 +1,12 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import Head from 'next/head'
-import useSpotify, { fetchNowPlaying } from 'hooks/useSpotify'
-import RainbowText from 'components/rainbow-text/rainbow-text.component'
-import SpotifyPlaying from 'components/spotify-playing/spotify-playing.component'
-import Navbar from 'components/navbar/navbar.component'
-import { Wrapper, Container, Widgets, Content } from 'styles/index.styles'
+import useSpotify, { fetchNowPlaying } from '../hooks/useSpotify'
+import RainbowText from '../components/rainbow-text/rainbow-text.component'
+import SpotifyPlaying from '../components/spotify-playing/spotify-playing.component'
+import Navbar from '../components/navbar/navbar.component'
+import { Wrapper, Container, Widgets, Content } from '../styles/index.styles'
 import { FunctionComponent } from 'react'
 import { GetServerSideProps } from 'next'
 

@@ -1,8 +1,9 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import { FunctionComponent } from 'react'
 import { Wrapper, Container, Left, Middle, Right, Title } from './navbar.styles'
-import ThemeToggle from 'components/theme-toggle/theme-toggle.component'
+import ThemeToggle from '../theme-toggle/theme-toggle.component'
 
 interface IProps {
   title?: string

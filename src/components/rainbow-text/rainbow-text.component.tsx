@@ -67,7 +67,7 @@ const RainbowText: FunctionComponent<IProps> = ({
       setAnimId(startAnimation(context))
     }
 
-    return () => stopAnimation
+    return stopAnimation
 
     // Montserrat font loaded
   }, [canvasRef, svgTextRef, text, fontSize, fontWeight, fontFamily, animId])

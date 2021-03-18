@@ -1,8 +1,9 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import { Container, Button } from './theme-toggle.styles'
 import { RiMoonClearFill, RiSunFill } from 'react-icons/ri'
-import useThemeToggle from 'hooks/useThemeToggle'
+import useThemeToggle from '../../hooks/useThemeToggle'
 
 const ThemeToggle = () => {
   const { colorMode, toggleTheme } = useThemeToggle()

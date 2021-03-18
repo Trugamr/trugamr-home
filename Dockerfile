@@ -6,11 +6,7 @@ WORKDIR /app
 COPY package.json /app
 RUN npm i
 # Copying other files
-COPY public /app/public
-COPY src /app/src
-COPY tsconfig.json /app
-COPY next-env.d.ts /app
-COPY .env.local /app
+COPY * /app/
 # Build app
 RUN npm run-script build
 # Expose default port
